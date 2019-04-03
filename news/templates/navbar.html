@@ -1,0 +1,67 @@
+<nav class="navbar navbar bg-primary" style="background-color: turquoise;">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a href="/"><img src="../static/images/Instagram_icon.png" width="40px;"></a>
+            <a href="{% url 'home' %}" id="instTitle" style="color: black">
+                {{request.user.username}}
+
+        </div>
+
+        <div class="navbar-right">
+            {% if user.is_authenticated %}
+            <ul>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown" role="button"
+                        aria-expanded="false">Account
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li>
+                            <a href="{%url 'home'%}">Home</a>
+                        </li>
+                        <li>
+                            <a href="/accounts/password/change">Change Password</a>
+                        </li>
+                        <li>
+                            <a href="/logout">Logout</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            {% else %}
+            <li>
+                <a class='btn btn-default' href="/accounts/login">Login</a>
+            </li>
+
+            {% endif %}
+        </div>
+        <ul class="nav nav-tabs navbar-right">
+            {% if request.user.profile %}
+            <li><a href="/profile/{{request.user.profile.id}}"><img class="img-responsive" src="../static/images/person.png"
+                        style="width: 25px;"></a></li>
+            {% else %}
+            <li><a href="/profile/new"><img class="img-responsive" src="../static/images/person.png" style="width: 25px;"></a></li>
+            {% endif %}
+            <li><a href="/followees"><img class="img-responsive" src="../static/images/heart.png" style="width: 30px;"></a></li>
+            <li><a href="/post/new"><img class="img-responsive" src="../static/images/baseline-add_circle_outline-24px.svg"
+                        style="width: 30px;"></a></li>
+        </ul>
+
+
+
+        <!-- Adding a search form  -->
+        <div class="col-sm-4 col-md-4 navbar-right">
+            <form class="navbar-form" role="search" action="{% url 'search_results' %}">
+
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search Project" name="project">
+                    <div class="input-group-btn">
+                        <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+        <!-- search form end -->
+    </div>
+</nav>
